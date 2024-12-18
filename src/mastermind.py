@@ -5,6 +5,22 @@ possible_colors = ["black", "green", "orange", "blue", "yellow", "red"]
 max_count = 10
 combination_length = 4
 
+def instruction():
+    print("Bienvenue dans le jeu Mastermind !")
+
+    print("_" * 50)
+    print("Le but du jeu est de deviner la combinaison secrète de 04 couleurs.")
+
+    print("_" * 50)
+    print("Les couleurs possibles sont : black, green, orange, blue, yellow, red")
+
+    print("_" * 50)
+    print("A chaque tour, entrez votre proposition de 04 couleurs séparees par des espaces.")
+
+    print("_" * 50)
+    print("Je vous dirai combien de coleuurs sont bien placées et combien sont mal placées")
+    print("_" * 50)
+
 def generate_secret_combination():
     secret_combination = [random.choice(possible_colors) for index in range(combination_length)]
     return secret_combination
@@ -63,10 +79,11 @@ def compare_guess_to_solution(guess, solution):
 # print(f"Résultat: {result[0]} bien placée(s), {result[1]} mal placée(s)")
 
 
-def main():
+def player_game():
+
+
+    instruction()
     gut_solution = generate_secret_combination()
-    print('Bienvenue dans le jeu Mastermind')
-    print(f"soluition secréte : {gut_solution}")
 
     count = 0
     winner = False
@@ -76,21 +93,26 @@ def main():
 
         correct, no_correct = compare_guess_to_solution(guess, gut_solution)
 
+        print(f"Résultat de votre proposition : ")
+        print(f"- {correct} couleur birn placée.")
+        print(f"- {no_correct} couleur mal placée.")
+        print(f"Il vous reste {max_count - count -1} tentative.")
+
+        print("-" * 50)
+
 
         if correct == combination_length:
-            print("Félicitations, vous avez trouvé la solution ! 🎉")
+            print(f"Félicitations, vous avez trouvé la solution en {count} tentative.")
             winner = True
         else:
             print(f"Résultat: {correct} bien placée(s), {no_correct} mal placée(s).")
             count += 1
-            print(f"Il vous reste {max_count - count} tentative(s).")
 
 
     if not winner:
-        print(f"Désolé, vous avec épuisé vos tentative. La solution était : {gut_solution}" )
+        print(f"Time over! La combinaison secréte était : {','.join(gut_solution)}" )
     else:
         print(f"Vous avez gagné en {count + 1} tantatives.")
 
 
-if __name__ == "__main__":
-    main()
+player_game()
