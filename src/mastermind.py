@@ -30,7 +30,34 @@ def guess_player():
         else:
             return guess_list
         
-result = guess_player()
-print(f"generated player guess: {result}")
+# result = guess_player()
+# print(f"generated player guess: {result}")
+
+def compare_guess_to_solution(guess, solution):
+    correct_position = 0
+    false_position = 0
+
+    solution_copy = solution[:]
+    guess_copy = guess[:]
+
+
+    for index in range(len(guess)):
+        if guess[index] == solution[index]:
+            correct_position += 1
+            solution_copy[index] = "x"
+            guess_copy[index] ="x"
+    
+
+    for index in range(len(guess)):
+        if guess_copy[index] != "x" and guess_copy[index] in solution_copy:
+            false_position += 1
+            solution_copy[solution_copy.index(guess_copy[index])] = "x"
+
+    return correct_position, false_position
 
         
+secret_combination = generate_secret_combination()
+player_guess = guess_player()
+result = compare_guess_to_solution(player_guess, secret_combination)
+print(f"Combinaison secrète: {secret_combination}")
+print(f"Résultat: {result[0]} bien placée(s), {result[1]} mal placée(s)")
