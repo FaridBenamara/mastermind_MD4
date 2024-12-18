@@ -2,7 +2,7 @@ import random
 
 
 possible_colors = ["black", "green", "orange", "blue", "yellow", "red"]
-max_attemps = 10
+max_count = 10
 combination_length = 4
 
 def generate_secret_combination():
@@ -56,8 +56,41 @@ def compare_guess_to_solution(guess, solution):
     return correct_position, false_position
 
         
-secret_combination = generate_secret_combination()
-player_guess = guess_player()
-result = compare_guess_to_solution(player_guess, secret_combination)
-print(f"Combinaison secrète: {secret_combination}")
-print(f"Résultat: {result[0]} bien placée(s), {result[1]} mal placée(s)")
+# secret_combination = generate_secret_combination()
+# player_guess = guess_player()
+# result = compare_guess_to_solution(player_guess, secret_combination)
+# print(f"Combinaison secrète: {secret_combination}")
+# print(f"Résultat: {result[0]} bien placée(s), {result[1]} mal placée(s)")
+
+
+def main():
+    gut_solution = generate_secret_combination()
+    print('Bienvenue dans le jeu Mastermind')
+    print(f"soluition secréte : {gut_solution}")
+
+    count = 0
+    winner = False
+
+    while count < max_count and not winner:
+        guess = guess_player()
+
+        correct, no_correct = compare_guess_to_solution(guess, gut_solution)
+
+
+        if correct == combination_length:
+            print("Félicitations, vous avez trouvé la solution ! 🎉")
+            winner = True
+        else:
+            print(f"Résultat: {correct} bien placée(s), {no_correct} mal placée(s).")
+            count += 1
+            print(f"Il vous reste {max_count - count} tentative(s).")
+
+
+    if not winner:
+        print(f"Désolé, vous avec épuisé vos tentative. La solution était : {gut_solution}" )
+    else:
+        print(f"Vous avez gagné en {count + 1} tantatives.")
+
+
+if __name__ == "__main__":
+    main()
