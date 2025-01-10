@@ -79,3 +79,34 @@ def draw_text(text, x, y):
     font = pygame.font.SysFont("Arial", 24)
     text_surface = font.render(text, True, (255, 255, 255))
     screen.blit(text_surface, (x, y))
+
+def play_game():
+    secret_comb = generate_secret_combination()
+    attempts_left = max_count
+    winner = False
+
+    while attempts_left > 0 and not winner:
+        guess = get_player_guess()
+        correct, incorrect = compare_guess_to_solution(guess, secret_comb)
+
+        screen.fill((30, 30, 30))
+
+        if correct == combination_length:
+            winner = True
+            draw_text("Félicitations, vous avez gagné !", 200, 200)
+        elif attempts_left == 1:
+            draw_text(f"La solution était : {', '.join(secret_comb)}", 200, 200)
+
+        pygame.display.update()
+        pygame.time.wait(1000)
+
+        attempts_left -= 1
+
+    pygame.display.update()
+    pygame.time.wait(3000)
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == "__main__":
+    play_game()
