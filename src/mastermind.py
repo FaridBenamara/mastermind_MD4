@@ -1,5 +1,6 @@
 import random
-
+import pygame
+import sys
 
 possible_colors = ["black", "green", "orange", "blue", "yellow", "red"]
 max_count = 10
@@ -114,5 +115,7 @@ def player_game():
     else:
         print(f"Vous avez gagné en {count + 1} tantatives.")
 
+def display_game():
+    pass
 
 player_game()
