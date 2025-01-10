@@ -93,13 +93,14 @@ def play_game():
         correct, incorrect = compare_guess_to_solution(guess, secret_comb)
 
         screen.fill((30, 30, 30))
+        draw_text(f"La solution secrète est : {secret_comb}", 200, 200)
         display_game_results(correct, incorrect, attempts_left)
 
         if correct == combination_length:
             winner = True
-            draw_text("Félicitations, vous avez gagné !", 200, 200)
+            draw_text("Félicitations, vous avez gagné !", 400, 400)
         elif attempts_left == 1:
-            draw_text(f"La solution était : {', '.join(secret_comb)}", 200, 200)
+            draw_text(f"La solution était : {', '.join(secret_comb)}", 450, 450)
 
         pygame.display.update()
         pygame.time.wait(1000)
