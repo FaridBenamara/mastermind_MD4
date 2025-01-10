@@ -4,6 +4,12 @@
  **Mastermind** python ui avec  **Pygame**.
 
 
+### Membrs
+[Github : Farid BENAMARA ](https://github.com/FaridBenamara)
+[Github : Bruno Tagaingne](https://github.com/Tagaingne)
+
+  
+
 ## Fonctionnalités
 - Génération aléatoire d'une combinaison secrète de 4 couleurs parmi 6 couleurs possibles : noir, vert, orange, bleu, jaune, rouge.
 - Pour chaque tentative du joueur, le jeu affiche :
