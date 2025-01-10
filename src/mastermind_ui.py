@@ -32,3 +32,50 @@ def compare_guess_to_solution(guess, solution):
             solution_copy[solution_copy.index(guess_copy[index])] = "x"
 
     return correct_position, fausse_position
+
+def draw_buttons(colors, selected_color_index):
+    x, y = 50, 150
+    button_width = 100
+    button_height = 50
+
+    for index, color in enumerate(colors):
+        button_rect = pygame.Rect(x + index * (button_width + 20), y, button_width, button_height)
+        pygame.draw.rect(screen, pygame.Color(color), button_rect)
+        if index == selected_color_index:
+            pygame.draw.rect(screen, (100, 100, 100), button_rect, 3)
+
+        font = pygame.font.SysFont("Arial", 24)
+        text_surface = font.render(color, True, (255, 255, 255))
+        screen.blit(text_surface, (button_rect.centerx - 40, button_rect.centery - 10))
+
+
+def get_player_guess():
+    selected_color_index = 0
+    guess = []
+    while len(guess) < combination_length:
+        screen.fill((30, 30, 30))
+        draw_buttons(possible_colors, selected_color_index)
+        draw_text(f"Choisis la couleur pour la position {len(guess) + 1}", 200, 50)
+
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    selected_color_index = (selected_color_index + 1) % len(possible_colors)
+                elif event.key == pygame.K_LEFT:
+                    selected_color_index = (selected_color_index - 1) % len(possible_colors)
+                elif event.key == pygame.K_RETURN:
+                    guess.append(possible_colors[selected_color_index])
+
+    return guess
+
+
+def draw_text(text, x, y):
+    font = pygame.font.SysFont("Arial", 24)
+    text_surface = font.render(text, True, (255, 255, 255))
+    screen.blit(text_surface, (x, y))
