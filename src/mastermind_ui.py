@@ -79,7 +79,10 @@ def draw_text(text, x, y):
     font = pygame.font.SysFont("Arial", 24)
     text_surface = font.render(text, True, (255, 255, 255))
     screen.blit(text_surface, (x, y))
-
+# Afficher les résultats
+def display_game_results(correct, incorrect, remaining_attempts):
+    draw_text(f"{correct} bien(s) placée(s), {incorrect} mal(s) placée(s)", 200, 100)
+    draw_text(f"Il vous reste {remaining_attempts} tentative(s)", 200, 150)
 def play_game():
     secret_comb = generate_secret_combination()
     attempts_left = max_count
@@ -90,6 +93,7 @@ def play_game():
         correct, incorrect = compare_guess_to_solution(guess, secret_comb)
 
         screen.fill((30, 30, 30))
+        display_game_results(correct, incorrect, attempts_left)
 
         if correct == combination_length:
             winner = True
